@@ -44,8 +44,15 @@
             </tr>
             <tr>
                 <td><label>Rating:</label></td>
-                <td><form:input path="rating"/>
-                    <form:errors path="rating" cssClass="error"/>
+                <td><form:select path="rating">
+                    <form:option value="1" label="1"/>
+                    <form:option value="2" label="2"/>
+                    <form:option value="3" label="3"/>
+                    <form:option value="4" label="4"/>
+                    <form:option value="5" label="5"/>
+                </form:select>
+                        <%--path="rating"/>--%>
+                    <%--<form:errors path="rating" cssClass="error"/>--%>
                 </td>
             </tr>
             <tr>

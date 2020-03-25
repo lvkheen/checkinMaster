@@ -21,14 +21,22 @@
             <tr>
                 <th> Username </th>
                 <th> Password </th>
+                <th> Action </th>
             </tr>
 
             <c:forEach var="tempUser" items="${users}">
+
+                <c:url var="deleteUser" value="/deleteUser">
+                    <c:param name="userId" value="${tempUser.username}"/>
+                </c:url>
 
 
                 <tr>
                     <td>${tempUser.username}</td>
                     <td>${tempUser.password}</td>
+                    <td><a href="${deleteUser}"
+                    onclick="if (!(confirm('Are you sure?'))) return false"> Delete</a>
+                    </td>
                 </tr>
             </c:forEach>
 

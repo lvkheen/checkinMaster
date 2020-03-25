@@ -18,4 +18,6 @@ public interface UserDao {
     Location getLocation(int id);
 
     void saveLocation(Location location);
+
+    void deleteUser(String username);
 }

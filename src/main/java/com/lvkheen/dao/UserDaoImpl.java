@@ -1,5 +1,6 @@
 package com.lvkheen.dao;
 
+import com.lvkheen.entity.Authorities;
 import com.lvkheen.entity.Location;
 import com.lvkheen.entity.User;
 import org.hibernate.Session;
@@ -70,6 +71,15 @@ public class UserDaoImpl implements UserDao{
         Session session = sessionFactory.getCurrentSession();
 
         session.saveOrUpdate(location);
+    }
+
+    @Override
+    public void deleteUser(String userToDelete) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery("delete from User where username=:userToDelete");
+        query.setParameter("userToDelete", userToDelete);
+        query.executeUpdate();
     }
 
 }

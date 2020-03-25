@@ -76,6 +76,15 @@ public class HomeController {
 		}
 	}
 
+	//
+	@GetMapping("/deleteUser")
+	public String deleteUser(@RequestParam("userId") String username){
+		userService.deleteUser(username);
+		return "redirect:/admin-panel";
+	}
+	//
+
+
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder){
 		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);

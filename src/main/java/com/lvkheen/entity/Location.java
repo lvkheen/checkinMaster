@@ -13,7 +13,7 @@ public class Location {
     private int id;
 
     @NotNull(message = "This field is required")
-    @Pattern(regexp = "[A-Za-z]+", message = "Incorrect city")
+    @Pattern(regexp = "\\D+", message = "Incorrect city")
     @Column(name = "city")
     private String city;
 

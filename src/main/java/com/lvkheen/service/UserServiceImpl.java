@@ -48,5 +48,10 @@ public class UserServiceImpl implements UserService {
         userDao.saveLocation(location);
     }
 
+    @Override
+    public void deleteUser(String username) {
+        userDao.deleteUser(username);
+    }
+
 
 }
