@@ -3,7 +3,7 @@
 <head>
     <title>Access denied</title>
 </head>
-<h1>Sorry, you have no permission to check this page.</h1>
+<h1 style="color : red">Sorry, you have no permission to check this page.</h1>
 <hr>
 
 <a href="${pageContext.request.contextPath}/home"><h3>Home</h3></a>

@@ -36,8 +36,11 @@
     <input type="submit" value="Login"/>
 
 </form:form>
+<a href="${pageContext.request.contextPath}/registration"> Registration </a>
+
 
 <hr>
 <a href="${pageContext.request.contextPath}/"> Welcome page </a>
+
 </body>
 

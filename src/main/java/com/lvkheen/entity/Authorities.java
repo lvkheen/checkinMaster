@@ -6,26 +6,20 @@ import javax.persistence.*;
 @Table(name = "authorities")
 public class Authorities {
 
-//    @Id
-//    @Column(name = "username")
-//    private String username;
     @Id
     @Column(name = "authority")
     private String authority;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "username")
     private User user;
 
     public Authorities() {
     }
 
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
+    public Authorities(String authority){
+        this.authority = authority;
+    }
+
 
     public String getAuthority() {
         return authority;

@@ -16,10 +16,8 @@
 
             <security:authorize access="hasAnyRole('MODERATOR','ADMIN')">
         <a href="${pageContext.request.contextPath}/moderator-panel">Moderator panel</a>
-        <br><br>
+        <p/>
             </security:authorize>
-
-
 
             <security:authorize access="hasAnyRole('ADMIN','MODERATOR')">
         <a href="${pageContext.request.contextPath}/admin-panel">Admin panel</a>

@@ -18,8 +18,12 @@ import javax.validation.Valid;
 @Controller
 public class HomeController {
 
-	@Autowired
 	private UserService userService;
+
+	@Autowired
+	public HomeController(UserService userService) {
+		this.userService = userService;
+	}
 
 	@GetMapping("/")
 	public String welcomePage(){
@@ -76,13 +80,11 @@ public class HomeController {
 		}
 	}
 
-	//
 	@GetMapping("/deleteUser")
 	public String deleteUser(@RequestParam("userId") String username){
 		userService.deleteUser(username);
 		return "redirect:/admin-panel";
 	}
-	//
 
 
 	@InitBinder

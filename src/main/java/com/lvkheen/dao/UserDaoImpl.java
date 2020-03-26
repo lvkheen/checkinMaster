@@ -1,6 +1,7 @@
 package com.lvkheen.dao;
 
 import com.lvkheen.entity.Authorities;
+import com.lvkheen.entity.CrmUser;
 import com.lvkheen.entity.Location;
 import com.lvkheen.entity.User;
 import org.hibernate.Session;
@@ -33,9 +34,11 @@ public class UserDaoImpl implements UserDao{
     public User getUser(String username) {
         Session session = sessionFactory.getCurrentSession();
 
-        Query<User> query = session.createQuery("from User where username=:userName", User.class);
-        query.setParameter("userName", username);
-        User user = query.getSingleResult();
+        User user = session.get(User.class, username);
+
+//        Query<User> query = session.createQuery("from User where username=:userName", User.class);
+//        query.setParameter("userName", username);
+//        User user = query.getSingleResult();
 
         return user;
     }
@@ -80,6 +83,25 @@ public class UserDaoImpl implements UserDao{
         Query query = session.createQuery("delete from User where username=:userToDelete");
         query.setParameter("userToDelete", userToDelete);
         query.executeUpdate();
+    }
+
+    @Override
+    public void saveUser(CrmUser crmUser) {
+        Session session = sessionFactory.getCurrentSession();
+        System.out.println(">>>>>saving");
+
+
+        User user = new User();
+        Authorities authority = new Authorities("ROLE_USER");
+
+        user.setUsername(crmUser.getUsername());
+        user.setPassword("{noop}" + crmUser.getPassword());
+        user.setEnabled(1);
+        user.add(authority);
+
+        session.save(user);
+        session.save(authority);
+
     }
 
 }

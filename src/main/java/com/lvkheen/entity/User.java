@@ -3,6 +3,7 @@ package com.lvkheen.entity;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -16,12 +17,17 @@ public class User {
     @Column(name = "enabled")
     private int enabled;
 
-    //
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Authorities> authorities;
-    //
 
     public User() {
+    }
+
+    public User(String username, String password, int enabled, List<Authorities> authorities) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.authorities = authorities;
     }
 
     public String getUsername() {
@@ -48,14 +54,8 @@ public class User {
         this.enabled = enabled;
     }
 
-    //
-
     public List<Authorities> getAuthorities() {
         return authorities;
-    }
-
-    public void setAuthorities(List<Authorities> authorities) {
-        this.authorities = authorities;
     }
 
     public void add(Authorities newAuthority){
@@ -65,7 +65,5 @@ public class User {
         authorities.add(newAuthority);
         newAuthority.setUser(this);
     }
-
-    //
 
 }

@@ -1,5 +1,6 @@
 package com.lvkheen.service;
 
+import com.lvkheen.entity.CrmUser;
 import com.lvkheen.entity.Location;
 import com.lvkheen.entity.User;
 
@@ -20,4 +21,6 @@ public interface UserService {
     void saveLocation(Location location);
 
     void deleteUser(String username);
+
+    void saveUser(CrmUser crmUser);
 }

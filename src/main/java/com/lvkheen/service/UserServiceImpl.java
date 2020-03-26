@@ -1,5 +1,6 @@
 package com.lvkheen.service;
 
+import com.lvkheen.entity.CrmUser;
 import com.lvkheen.dao.UserDao;
 import com.lvkheen.entity.Location;
 import com.lvkheen.entity.User;
@@ -51,6 +52,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(String username) {
         userDao.deleteUser(username);
+    }
+
+    @Override
+    public void saveUser(CrmUser crmUser) {
+        userDao.saveUser(crmUser);
     }
 
 
