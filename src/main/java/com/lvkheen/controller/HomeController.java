@@ -17,10 +17,8 @@ import javax.validation.Valid;
 
 @Controller
 public class HomeController {
-
 	private UserService userService;
 
-	@Autowired
 	public HomeController(UserService userService) {
 		this.userService = userService;
 	}
@@ -35,26 +33,7 @@ public class HomeController {
 
 		List<Location> locations = userService.getLocations();
 		model.addAttribute("locations", locations);
-
 		return "home";
-	}
-
-	@GetMapping("/moderator-panel")
-	public String leadersPage(Model model){
-
-		List<User> users = userService.getUsers();
-		model.addAttribute("users", users);
-
-		return "moderator-panel";
-	}
-
-	@GetMapping("/admin-panel")
-	public String adminPage(Model model){
-
-		List<User> users = userService.getUsers();
-		model.addAttribute("users", users);
-
-		return "admin-panel";
 	}
 
 	@GetMapping("/deleteLocation")
@@ -78,12 +57,6 @@ public class HomeController {
 			userService.saveLocation(location);
 			return "redirect:/home";
 		}
-	}
-
-	@GetMapping("/deleteUser")
-	public String deleteUser(@RequestParam("userId") String username){
-		userService.deleteUser(username);
-		return "redirect:/admin-panel";
 	}
 
 

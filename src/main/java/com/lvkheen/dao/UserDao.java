@@ -23,4 +23,12 @@ public interface UserDao {
     void deleteUser(String username);
 
     void saveUser(CrmUser crmUser);
+
+    void banUser(String username);
+
+    void restoreUser(String username);
+
+    void setAdmin(String username);
+
+    void setModerator(String username);
 }

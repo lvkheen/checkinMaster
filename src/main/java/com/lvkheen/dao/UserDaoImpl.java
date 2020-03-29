@@ -36,10 +36,6 @@ public class UserDaoImpl implements UserDao{
 
         User user = session.get(User.class, username);
 
-//        Query<User> query = session.createQuery("from User where username=:userName", User.class);
-//        query.setParameter("userName", username);
-//        User user = query.getSingleResult();
-
         return user;
     }
 
@@ -92,16 +88,90 @@ public class UserDaoImpl implements UserDao{
 
 
         User user = new User();
-        Authorities authority = new Authorities("ROLE_USER");
+        Authorities role_user = new Authorities("ROLE_USER");
 
         user.setUsername(crmUser.getUsername());
         user.setPassword("{noop}" + crmUser.getPassword());
         user.setEnabled(1);
-        user.add(authority);
+        user.add(role_user);
 
         session.save(user);
-        session.save(authority);
+        session.save(role_user);
 
+    }
+
+    @Override
+    public void banUser(String username) {
+        Session session = sessionFactory.getCurrentSession();
+
+        User user = session.get(User.class, username);
+        Authorities role_suspended = new Authorities("ROLE_SUSPENDED");
+
+        Query query = session.createQuery("delete from Authorities where username=:userToBan");
+        query.setParameter("userToBan", username);
+        query.executeUpdate();
+
+        user.add(role_suspended);
+
+        session.save(user);
+        session.save(role_suspended);
+    }
+
+    @Override
+    public void restoreUser(String username) {
+        Session session = sessionFactory.getCurrentSession();
+
+        User user = session.get(User.class, username);
+        Authorities role_user = new Authorities("ROLE_USER");
+
+        Query query = session.createQuery("delete from Authorities where username=:userToRestore");
+        query.setParameter("userToRestore", username);
+        query.executeUpdate();
+
+        user.add(role_user);
+
+        session.save(user);
+        session.save(role_user);
+    }
+
+    @Override
+    public void setAdmin(String username) {
+        Session session = sessionFactory.getCurrentSession();
+
+        User user = session.get(User.class, username);
+        Authorities role_user = new Authorities("ROLE_USER");
+        Authorities role_admin = new Authorities("ROLE_ADMIN");
+
+        Query query = session.createQuery("delete from Authorities where username=:userToSetAdmin");
+        query.setParameter("userToSetAdmin", username);
+        query.executeUpdate();
+
+        user.add(role_user);
+        user.add(role_admin);
+
+        session.save(user);
+        session.save(role_user);
+        session.save(role_admin);
+    }
+
+    @Override
+    public void setModerator(String username) {
+        Session session = sessionFactory.getCurrentSession();
+
+        User user = session.get(User.class, username);
+        Authorities role_user = new Authorities("ROLE_USER");
+        Authorities role_moderator = new Authorities("ROLE_MODERATOR");
+
+        Query query = session.createQuery("delete from Authorities where username=:userToSetModerator");
+        query.setParameter("userToSetModerator", username);
+        query.executeUpdate();
+
+        user.add(role_user);
+        user.add(role_moderator);
+
+        session.save(user);
+        session.save(role_user);
+        session.save(role_moderator);
     }
 
 }

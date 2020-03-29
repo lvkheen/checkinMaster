@@ -23,14 +23,30 @@
             <tr>
                 <th> Username </th>
                 <th> Password </th>
+                <th> Action </th>
             </tr>
 
             <c:forEach var="tempUser" items="${users}">
+
+                <c:url var="banUser" value="/moderator/banUser">
+                    <c:param name="userId" value="${tempUser.username}"/>
+                </c:url>
+
+                <c:url var="restoreUser" value="/moderator/restoreUser">
+                    <c:param name="userId" value="${tempUser.username}"/>
+                </c:url>
 
 
                 <tr>
                     <td>${tempUser.username}</td>
                     <td>${tempUser.password}</td>
+                    <td>
+                        <a href="${banUser}"
+                           onclick="if (!(confirm('Ban user?'))) return false"> Ban </a>
+                        |
+                        <a href="${restoreUser}"
+                           onclick="if(!(confirm('Restore ${tempUser.username}?'))) return false"> Restore </a>
+                    </td>
                 </tr>
             </c:forEach>
 

@@ -1,5 +1,6 @@
 <%@ taglib prefix="forn" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>New location</title>
@@ -21,7 +22,6 @@
     <form:form action="saveLocation" modelAttribute="location" method="POST">
 
         <form:hidden path="id"/>
-
         <table>
             <tbody>
             <tr>
@@ -38,7 +38,8 @@
             </tr>
             <tr>
                 <td><label>Your name:</label></td>
-                <td><form:input path="visitorName"/>
+                <td>
+                    <form:input path="visitorName"/>
                     <form:errors path="visitorName" cssClass="error"/>
                 </td>
             </tr>
@@ -51,8 +52,6 @@
                     <form:option value="4" label="4"/>
                     <form:option value="5" label="5"/>
                 </form:select>
-                        <%--path="rating"/>--%>
-                    <%--<form:errors path="rating" cssClass="error"/>--%>
                 </td>
             </tr>
             <tr>

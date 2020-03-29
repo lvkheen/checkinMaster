@@ -14,13 +14,13 @@
 
         <hr>
 
-            <security:authorize access="hasAnyRole('MODERATOR','ADMIN')">
-        <a href="${pageContext.request.contextPath}/moderator-panel">Moderator panel</a>
+            <security:authorize access="hasRole('MODERATOR')">
+        <a href="${pageContext.request.contextPath}/moderator/moderator-panel">Moderator panel</a>
         <p/>
             </security:authorize>
 
-            <security:authorize access="hasAnyRole('ADMIN','MODERATOR')">
-        <a href="${pageContext.request.contextPath}/admin-panel">Admin panel</a>
+            <security:authorize access="hasRole('ADMIN')">
+        <a href="${pageContext.request.contextPath}/admin/admin-panel">Admin panel</a>
         <hr>
             </security:authorize>
 
